@@ -9,7 +9,7 @@ test("Rate limit check on a global endpoint for authenticated users", async () =
   for (let i = 0; i < 21; i++) {
     response = await request(app)
       .get(endpoint)
-      .set("x-auth-token", "anonemptyvalue");
+      .set("x-auth-token", "nonemptyvalue");
       if (i < 20) {
       expect(response.statusCode).toBe(200);
     }
