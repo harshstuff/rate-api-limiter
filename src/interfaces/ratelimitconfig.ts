@@ -1,7 +1,5 @@
+import { BaseRateLimit } from "./baseratelimit";
 export interface RateLimitConfig {
   windowMs: number;
-  maxRequests: {
-    authenticated: number;
-    unauthenticated: number;
-  };
+  maxRequests: BaseRateLimit;
 }

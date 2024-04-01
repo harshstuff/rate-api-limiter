@@ -25,6 +25,7 @@ The rate limiting middleware allows for both global and endpoint-specific reques
 ### Installation
 
 1. **Clone the repository:**
+- **npm ci** 
 
 ## Development mode:
 - **docker compose -f redis-dc.yml up**
