@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug with ts-node",
+            "runtimeExecutable": "npx", // Use npx to run ts-node
+            "runtimeArgs": [
+                "ts-node", // Specify ts-node as the command to run
+                "--files", // Ensure type definitions are included
+                "${workspaceFolder}/src/app.ts" // Adjust the path to your entry point TypeScript file
+            ],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.js" // Adjust this if you have a different output directory for compiled JS files
+            ],
+            "console": "integratedTerminal" // Optional: This runs the debugger in VS Code's integrated terminal
+        }
+    ]
+}
