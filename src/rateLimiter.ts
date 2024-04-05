@@ -3,19 +3,10 @@ import Redis from "ioredis";
 import { globalRateLimitConfig } from "./config/config";
 import { isTokenValid } from "./authUtils";
 import { RateLimitConfig } from "./interfaces/ratelimitconfig";
-import { OverrideConfig } from "./interfaces/overrideconfig";
+import { temporaryOverrides } from "./client/temporaryOverrides";
+
 
 const redisClient = new Redis();
-const temporaryOverrides: OverrideConfig[] = [
-  {
-    startDate: "2024-04-04T00:00:00Z", // Start of April 4th, 2024
-    endDate: "2024-04-05T00:00:00Z", // Start of April 5th, 2024, marking the end of the override period
-    rateLimit: {
-      authenticated: 3, // Example increased limit for authenticated users
-      unauthenticated: 2, // Example increased limit for unauthenticated users
-    },
-  },
-];
 
 export function getRateLimitMiddleware(customConfig?: RateLimitConfig) {
   return async function rateLimitMiddleware(
@@ -31,7 +22,6 @@ export function getRateLimitMiddleware(customConfig?: RateLimitConfig) {
       return currentDate >= start && currentDate <= end;
     });
 
-    // Determine the rate limit configuration to use
     const config = currentOverride
       ? {
           windowMs: globalRateLimitConfig.windowMs, // Keep the window size consistent
